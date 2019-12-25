@@ -254,24 +254,34 @@
 	var timer2;
 	var isMoving=false;
 	function next(){
-		index++;
-		navChange();
-		animate(slider,{left:-400*index},function(){
-			if(index===6){
-				slider.style.left="-400px";
-				index=1;
+		if(isMoving){
+				return;
 			}
-		});
+			isMoving=true;
+			index++;
+			navChange();
+			animate(slider,{left:-400*index},function(){
+				if(index===6){
+					slider.style.left="-400px";
+					index=1;
+				}
+				isMoving=false;
+			});
 	}
 	function prev(){
-		index--;
-		navChange();
-		animate(slider,{left:-400*index},function(){
-			if(index===0){
-				slider.style.left="-2000px";
-				index=5;
+		if(isMoving){
+				return;
 			}
-		});
+			isMoving=true;
+			index--;
+			navChange();
+			animate(slider,{left:-400*index},function(){
+					if(index===0 ){
+						slider.style.left="-2000px";
+						index=5;
+					}
+					isMoving=false;
+			});
 	}
 	var timer=setInterval(next,2000);
 	box.onmouseover=function(){
